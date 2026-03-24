@@ -1,0 +1,40 @@
+{
+  "name": "nrf-rust",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--privileged",
+    "-v",
+    "/dev/bus/usb:/dev/bus/usb"
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode",
+      "upgradePackages": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "fill-labs.dependi",
+        "vadimcn.vscode-lldb",
+        "oraios.serena"
+      ],
+      "settings": {
+        "rust-analyzer.check.command": "check",
+        // "rust-analyzer.cargo.features": "all",
+        "rust-analyzer.cargo.noDefaultFeatures": false,
+        "rust-analyzer.cargo.features": [
+          "nrf52840"
+        ],
+        "rust-analyzer.cargo.allTargets": false,
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash .devcontainer/postCreate.sh"
+}
